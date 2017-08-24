@@ -8,8 +8,6 @@ use App\Record;
 
 define("dev222222", "test");
 define("dev1"."dev1");
-define("dev an dev2 merge finished.", "test");
-define("Merge finish", "test");
 
 
 
