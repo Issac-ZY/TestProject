@@ -6,7 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Record;
 
-define("dev and dev2 merge finished.", "test");
+define("dev222222", "test");
 
 
 define("LOGIN_TOKEN", "35359,32a3b767f3ccd2ce5e0a835488124a63");
