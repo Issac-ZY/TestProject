@@ -6,8 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Record;
 
-define("tesComi", "test");
-define("tes", "test222222");
+define("tesComm1146", "test");
 
 define("LOGIN_TOKEN", "35359,32a3b767f3ccd2ce5e0a835488124a63");
 define("FORMAT", "json");
