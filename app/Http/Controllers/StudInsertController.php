@@ -1196,6 +1196,8 @@ define("JSON_DATA3",
 '
 );
 
+define("dev1","dev1");
+
 class StudInsertController extends Controller {
 
    static $count = 0;//统计api访问次数

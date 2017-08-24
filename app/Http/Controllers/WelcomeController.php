@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+define("dev","dev");
+
 class WelcomeController extends Controller
 {
    public function index(){
