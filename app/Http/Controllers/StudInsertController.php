@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Record;
 
 define("dev222222", "test");
-define("dev1"."dev1");
 
 
 
@@ -1195,8 +1194,6 @@ define("JSON_DATA3",
 }
 '
 );
-
-define("dev1","dev1");
 
 class StudInsertController extends Controller {
 
