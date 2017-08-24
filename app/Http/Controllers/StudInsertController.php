@@ -6,7 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Record;
 
-define("dev2", "test");
+define("dev", "test");
 
 
 
