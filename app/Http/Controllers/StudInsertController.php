@@ -6,7 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Record;
 
-define("master commit", "master");
+define("dev2", "master");
 
 define("LOGIN_TOKEN", "35359,32a3b767f3ccd2ce5e0a835488124a63");
 define("FORMAT", "json");
