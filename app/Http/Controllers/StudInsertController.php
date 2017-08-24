@@ -6,7 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Record;
 
-define("dev2", "master");
+define("dev and dev2 merge finished.", "test");
+
 
 define("LOGIN_TOKEN", "35359,32a3b767f3ccd2ce5e0a835488124a63");
 define("FORMAT", "json");
@@ -1244,7 +1245,7 @@ class StudInsertController extends Controller {
         $time_start1 = microtime(true);
         // 接收客户端JSON_DATA, 解析缓存进update_list         
           # $update_list = $this->jsonToArray(JSON_DATA); 
-        $update_list = $this->jsonToArray2(JSON_DATA2);        
+        $update_list = $this->jsonToArray2(JSON_DATA3);        
           # $this->printRecordList($update_list);
         // 按线路分别获取dnspod的记录列表
         $dnspod_list = $this->getDnspodLine();         
@@ -1269,7 +1270,7 @@ class StudInsertController extends Controller {
             echo "【".$i."】".print_r(self::$status_list[$i],1)."<br>";
         }
         echo "总用时：".round($time_end2 - $time_start1,3)."秒<br>";
-        $this->insertTask("1001", JSON_DATA2, $status);
+        $this->insertTask("1001", JSON_DATA3, $status);
     }
 
    //输出Record类元素数组
