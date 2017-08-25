@@ -1242,7 +1242,7 @@ class StudInsertController extends Controller {
         $time_start1 = microtime(true);
         // 接收客户端JSON_DATA, 解析缓存进update_list         
           # $update_list = $this->jsonToArray(JSON_DATA); 
-        $update_list = $this->jsonToArray2(JSON_DATA3);        
+        $update_list = $this->jsonToArray2(JSON_DATA2);        
           # $this->printRecordList($update_list);
         // 按线路分别获取dnspod的记录列表
         $dnspod_list = $this->getDnspodLine();         
@@ -1261,13 +1261,21 @@ class StudInsertController extends Controller {
         $time_end2 = microtime(true);
         $time = $time_end2 - $time_start2;
         echo "异步耗时：".round($time,3)."秒<br>";
-        $status = "";
+        $status = '{"successful":"0","failed":"0","list":[';
         for($i=0; $i<count(self::$status_list); $i++){
-            $status .= "【".$i."】".print_r(self::$status_list[$i],1)."<br>";
+            $status .= "{".print_r(self::$status_list[$i],1)."}";
+            if($i<count(self::$status_list)-1){
+                $status .=",";
+            }
             echo "【".$i."】".print_r(self::$status_list[$i],1)."<br>";
-        }
+        }        
         echo "总用时：".round($time_end2 - $time_start1,3)."秒<br>";
-        $this->insertTask("1001", JSON_DATA3, $status);
+        $status .="]}";
+        $this->insertTask("1001", JSON_DATA2, $status);
+       # echo print_r(json_decode($status),1);
+       # $json_status = array("list" => self::$status_list);
+       # echo print_r(json_encode($json_status),1)."<br>";
+        
     }
 
    //输出Record类元素数组
@@ -1494,8 +1502,9 @@ class StudInsertController extends Controller {
         $keyword = ""; //默认\u9ED8\u8BA4，电信\u7535\u4FE1，联通\u8054\u901A
         $obj = json_decode(JSON_DATA2);
         $record_list = array();
-        //因为只能按子域名sub_domain获取列表，因此可能获取了其他类型记录(CNAME)、其他类型线路的记录，因此需要过滤掉这些记录
+        //因为只能按子域名sub_domain获取列表，因此可能获取了其他类型记录(CNAME)、其他类型线路的记录(如联通)，因此需要过滤掉这些记录
         for($i=0; $i<count($obj->data); $i++){
+            //记录与传入数据相关的线路类型（如只包含移动、电信，过滤掉联通）
             $key_line_type = array();
             for($j=0; $j<count($obj->data[$i]->line); $j++){
                 $key = $obj->data[$i]->line[$j]->line_type;
@@ -1547,7 +1556,7 @@ class StudInsertController extends Controller {
         return $record_list;
      }
     /*
-     *更新线路,将update_list中的record与dspd_list中的record比较，完全相同则不操作，权值或ttl不同则进行修改，不存在的record则增加
+     *更新线路,将update_list中的record与dspd_list中的record比较，完全相同则不操作，多余的删除，权值或ttl不同则进行修改，不存在的record则增加
      *
      *update_list:需要更新的record列表
      *dspd__list:dnspod已存在的record列表
