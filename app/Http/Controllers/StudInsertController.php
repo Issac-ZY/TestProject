@@ -1246,7 +1246,7 @@ class StudInsertController extends Controller {
         $time_start1 = microtime(true);
         // 接收客户端JSON_DATA, 解析缓存进update_list         
           # $update_list = $this->jsonToArray(JSON_DATA); 
-        $update_list = $this->jsonToArray2(JSON_DATA3);        
+        $update_list = $this->jsonToArray2(JSON_DATA2);        
           # $this->printRecordList($update_list);
         // 按线路分别获取dnspod的记录列表
         $dnspod_list = $this->getDnspodLine();         
@@ -1256,7 +1256,7 @@ class StudInsertController extends Controller {
         $this->updateLine($update_list, $dnspod_list);
         echo "<br>访问api的总次数：".self::$count."<br>";
         $time_end1 = microtime(true);
-        echo '访问记录列表耗时：'.round($time_end1 - $time_start1,3)."秒<br>";
+        echo '访问记录列表耗时：'.round($time_end1 - $time_start1,2)."秒<br>";
       
         $time_start2 = microtime(true);
         $data=$this->curl_multi_fetch(self::$url_list, self::$data_list);
@@ -1270,8 +1270,8 @@ class StudInsertController extends Controller {
             $status .= "【".$i."】".print_r(self::$status_list[$i],1)."<br>";
             echo "【".$i."】".print_r(self::$status_list[$i],1)."<br>";
         }
-        echo "总用时：".round($time_end2 - $time_start1,3)."秒<br>";
-        $this->insertTask("1001", JSON_DATA3, $status);
+        echo "总用时：".round($time_end2 - $time_start1,2)."秒<br>";
+        $this->insertTask("1001", JSON_DATA2, $status);
     }
 
    //输出Record类元素数组
